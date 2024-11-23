@@ -8,6 +8,7 @@ function App() {
   return (
     <>
       <h2>Welcome To Trip Planner</h2>
+      <Button>Subscribe</Button>
     </>
   )
 }
