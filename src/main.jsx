@@ -7,6 +7,10 @@ const router=createBrowserRouter([
   {
     path:'/',
     element:<App/>
+  },
+  {
+    path:'/create-trip',
+    element:<CreateTrip/>
   }
 
 ])
