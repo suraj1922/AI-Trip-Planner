@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
 import { Input } from "@/components/ui/input"
 import { SelectTravelesList , SelectBudgetOptions} from '@/constant/option';
+import { Button } from '../components/ui/button';
 
 function CreateTrip() {
   const [place, setPlace] = useState();
@@ -16,13 +17,13 @@ function CreateTrip() {
       <div className='mt-20 flex flex-col gap-10'>
         <div>
           <h2 className='my-3 font-medium text-xl'>What is destination of choice?</h2>
-          <GooglePlacesAutocomplete
+          {/* <GooglePlacesAutocomplete
             apiKey={import.meta.env.VITE_GOOGLE_PLACE_API_KEY}
             selectProps={{
               place,
               onChange: (v) => { setPlace(v); console.log(v) }
             }}
-          />
+          /> */}
         </div>
       </div>
 
@@ -32,7 +33,7 @@ function CreateTrip() {
       </div>
 
       <div>
-        <h2 className='text-xl my-3 font-medium'>WHat is Your Budget?</h2>
+        <h2 className='text-xl my-3 font-medium'>What is Your Budget?</h2>
         <div className='grid grid-cols-3 gap-5 mt-5'>
           {SelectBudgetOptions.map((item, index) => {
             <div key={index} className='p-4 border cursor-pointer rounded-lg hover:shadow-lg'>
@@ -43,7 +44,6 @@ function CreateTrip() {
           })}
         </div>
       </div>
-
       <div>
         <h2 className='text-xl my-3 font-medium'>Who do you plan to travlling with on your next adventure</h2>
         <div className='grid grid-cols-3 gap-5 mt-5'>
