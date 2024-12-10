@@ -60,7 +60,6 @@ function CreateTrip() {
       <div className='my-10 justify-end flex'>
       <Button>Generate Trip</Button>
       </div>
-      
     </div>
 
     
