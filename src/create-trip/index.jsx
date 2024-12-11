@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
 import { Input } from "@/components/ui/input"
 import { SelectTravelesList , SelectBudgetOptions} from '@/constant/option';
@@ -7,8 +7,18 @@ import { Button } from '../components/ui/button';
 function CreateTrip() {
   const [place, setPlace] = useState();
   const [formData, setFormData] = useState([]);
-  const handleInputChange = (v)=>{
+  const handleInputChange = (name,value)=>{
+    setFormData({
+      ...formData,
+      [name]:value,
+    })
   }
+
+  useEffect(()=>{
+    console.log(formData);
+  },[formData])
+
+
   return (
     <div className='sm:px-10 md:px-32 lg:px-56 xl:px-10 px-5 mt-10'>
       <h2 className='font-bold text-3xl'>Tell us your travel preferences</h2>
@@ -21,7 +31,7 @@ function CreateTrip() {
             apiKey={import.meta.env.VITE_GOOGLE_PLACE_API_KEY}
             selectProps={{
               place,
-              onChange: (v) => { setPlace(v); console.log(v) }
+              onChange: (v) => { setPlace(v); handleInputChange('location', v);   }
             }}
           /> */}
         </div>
@@ -29,7 +39,9 @@ function CreateTrip() {
 
       <div>
         <h2 className='text-xl my-3 font-medium'>How many days are you planning your trip</h2>
-        <Input placeholder={'Ex.3'} type="number" />
+        <Input placeholder={'Ex.3'} type="number" 
+        onChange={(e)=>handleInputChange('noOfDays',e.target.value)}
+        />
       </div>
 
       <div>
@@ -38,7 +50,7 @@ function CreateTrip() {
           {SelectBudgetOptions.map((item, index) => (
             <div key={index} className='p-4 border cursor-pointer rounded-lg hover:shadow-lg'>
               <h2 className='text-4xl'>{item.icons}</h2>
-              <h2 className='font-bold'>{item.title}</h2>
+              <h2 className='font-bold text-lg'>{item.title}</h2>
               <h2 className='text-sm text-gray-500'>{item.desc}</h2>
             </div>
           ))}
@@ -50,7 +62,7 @@ function CreateTrip() {
           {SelectTravelesList.map((item, index) => (
             <div key={index} className='p-4 border cursor-pointer rounded-lg hover:shadow-lg'>
               <h2 className='text-4xl'>{item.icons}</h2>
-              <h2 className='font-bold'>{item.title}</h2>
+              <h2 className='font-bold text-lg'>{item.title}</h2>
               <h2 className='text-sm text-gray-500'>{item.desc}</h2>
             </div>
           ))}
