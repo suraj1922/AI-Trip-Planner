@@ -9,6 +9,8 @@ function CreateTrip() {
   const [place, setPlace] = useState();
   const [formData, setFormData] = useState([]);
   const handleInputChange = (name,value)=>{
+
+    
     setFormData({
       ...formData,
       [name]:value,
@@ -20,9 +22,14 @@ function CreateTrip() {
   },[formData])
 
 
+  const OnGenerateTrip=()=>{
+    if(formData?.noOdDays>5){
+      return;
+    }
+  }
   return (
     <div className='sm:px-10 md:px-32 lg:px-56 xl:px-10 px-5 mt-10'>
-      <h2 className='font-bold text-3xl'>Tell us your travel preferences</h2>
+      <h2 className='font-bold text-3xl'>Tell us your travel preferences🏕️☃️</h2>
       <p className='mt-3 text-gray-500 text-xl'>Just provide some basic inforation, and our trip planner will generare a customized itinearay based on your perferences.</p>
 
       <div className='mt-20 flex flex-col gap-10'>
@@ -78,7 +85,7 @@ function CreateTrip() {
       </div>
       
       <div className='my-10 justify-end flex'>
-      <Button>Generate Trip</Button>
+      <Button onClick={OnGenerateTrip}>Generate Trip</Button>
       </div>
     </div>
 
