@@ -23,9 +23,10 @@ function CreateTrip() {
 
 
   const OnGenerateTrip=()=>{
-    if(formData?.noOdDays>5){
+    if(formData?.noOdDays>5&&!formData?.location || formData?.budget || formData?.noPeople ){
       return;
     }
+    
   }
   return (
     <div className='sm:px-10 md:px-32 lg:px-56 xl:px-10 px-5 mt-10'>
