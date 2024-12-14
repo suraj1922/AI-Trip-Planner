@@ -38,13 +38,13 @@ function CreateTrip() {
       <div className='mt-20 flex flex-col gap-10'>
         <div>
           <h2 className='my-3 font-medium text-xl'>What is destination of choice?</h2>
-          {/* <GooglePlacesAutocomplete
+          <GooglePlacesAutocomplete
             apiKey={import.meta.env.VITE_GOOGLE_PLACE_API_KEY}
             selectProps={{
               place,
               onChange: (v) => { setPlace(v); handleInputChange('location', v);   }
             }}
-          /> */}
+          />
         </div>
       </div>
 
