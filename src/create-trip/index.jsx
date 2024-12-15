@@ -48,12 +48,12 @@ function CreateTrip() {
         </div>
       </div>
 
-      <div>
+      {/* <div>
         <h2 className='text-xl my-3 font-medium'>How many days are you planning your trip</h2>
         <Input placeholder={'Ex.3'} type="number" 
         onChange={(e)=>handleInputChange('noOfDays',e.target.value)}
         />
-      </div>
+      </div> */}
 
       <div>
         <h2 className='text-xl my-3 font-medium'>What is Your Budget?</h2>
