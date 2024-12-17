@@ -21,5 +21,5 @@ import { GoogleGenerativeAI, HarmCategory, HarmBlockThreshold } from "@google/ge
       history: [
         
       ],
-    });
+    })
   
