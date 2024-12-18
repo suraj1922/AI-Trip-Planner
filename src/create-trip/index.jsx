@@ -24,6 +24,9 @@ function CreateTrip() {
 
 
   const OnGenerateTrip=()=>{
+
+    
+
     if(formData?.noOdDays>5&&!formData?.location || formData?.budget || formData?.noPeople ){
       toast("Please fill all details")
       return;
