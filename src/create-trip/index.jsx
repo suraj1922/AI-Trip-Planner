@@ -9,6 +9,8 @@ import { toast } from 'sonner';
 function CreateTrip() {
   const [place, setPlace] = useState();
   const [formData, setFormData] = useState([]);
+  const [openDialog,  setOpenDialog] = useState(false);
+
   const handleInputChange = (name,value)=>{
 
     
@@ -26,7 +28,12 @@ function CreateTrip() {
   const OnGenerateTrip=()=>{
 
     
+    const user = localStorage.getItem('user');
 
+    if(!user){
+      setOpenDialog(true);
+      return;
+    }
     if(formData?.noOdDays>5&&!formData?.location || formData?.budget || formData?.noPeople ){
       toast("Please fill all details")
       return;
