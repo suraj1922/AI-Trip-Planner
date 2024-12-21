@@ -1,40 +1,49 @@
 import React, { useEffect, useState } from 'react'
 import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
 import { Input } from "@/components/ui/input"
-import { SelectTravelesList , SelectBudgetOptions} from '@/constant/option';
+import { SelectTravelesList, SelectBudgetOptions } from '@/constant/option';
 import { Button } from '../components/ui/button';
 import { it } from 'node:test';
 import { toast } from 'sonner';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
+
 
 function CreateTrip() {
   const [place, setPlace] = useState();
   const [formData, setFormData] = useState([]);
-  const [openDialog,  setOpenDialog] = useState(false);
+  const [openDialog, setOpenDialog] = useState(false);
 
-  const handleInputChange = (name,value)=>{
+  const handleInputChange = (name, value) => {
 
-    
+
     setFormData({
       ...formData,
-      [name]:value,
+      [name]: value,
     })
   }
 
-  useEffect(()=>{
+  useEffect(() => {
     console.log(formData);
-  },[formData])
+  }, [formData])
 
 
-  const OnGenerateTrip=()=>{
+  const OnGenerateTrip = () => {
 
-    
+
     const user = localStorage.getItem('user');
 
-    if(!user){
+    if (!user) {
       setOpenDialog(true);
       return;
     }
-    if(formData?.noOdDays>5&&!formData?.location || formData?.budget || formData?.noPeople ){
+    if (formData?.noOdDays > 5 && !formData?.location || formData?.budget || formData?.noPeople) {
       toast("Please fill all details")
       return;
     }
@@ -69,10 +78,10 @@ function CreateTrip() {
         <h2 className='text-xl my-3 font-medium'>What is Your Budget?</h2>
         <div className='grid grid-cols-3 gap-5 mt-5'>
           {SelectBudgetOptions.map((item, index) => (
-            <div key={index} 
-            onClick={()=>handleInputChange('budget',item.title)}
-            className={`p-4 border cursor-pointer rounded-lg hover:shadow-lg
-            ${formData?.budget==item.title && 'shadow-lg border-black'}
+            <div key={index}
+              onClick={() => handleInputChange('budget', item.title)}
+              className={`p-4 border cursor-pointer rounded-lg hover:shadow-lg
+            ${formData?.budget == item.title && 'shadow-lg border-black'}
             `}>
               <h2 className='text-4xl'>{item.icons}</h2>
               <h2 className='font-bold text-lg'>{item.title}</h2>
@@ -85,10 +94,10 @@ function CreateTrip() {
         <h2 className='text-xl my-3 font-medium'>Who do you plan to travlling with on your next adventure</h2>
         <div className='grid grid-cols-3 gap-5 mt-5'>
           {SelectTravelesList.map((item, index) => (
-            <div key={index} 
-            onClick={()=>handleInputChange('noPeople',item.people)}
+            <div key={index}
+              onClick={() => handleInputChange('noPeople', item.people)}
               className={`p-4 border cursor-pointer rounded-lg hover:shadow-lg
-              ${formData?.noPeople==item.people&& 'shadow-lg border-black'}`}>
+              ${formData?.noPeople == item.people && 'shadow-lg border-black'}`}>
               <h2 className='text-4xl'>{item.icons}</h2>
               <h2 className='font-bold text-lg'>{item.title}</h2>
               <h2 className='text-sm text-gray-500'>{item.desc}</h2>
@@ -96,13 +105,30 @@ function CreateTrip() {
           ))}
         </div>
       </div>
-      
+
       <div className='my-10 justify-end flex'>
-      <Button onClick={OnGenerateTrip}>Generate Trip</Button>
+        <Button onClick={OnGenerateTrip}>Generate Trip</Button>
       </div>
+
+      <Dialog open={openDialog}>
+        
+        <DialogContent>
+          <DialogHeader>
+            
+            <DialogDescription>
+              <img src="./logo.svg" alt="" />
+              <h2 className='font-bold text-lg mt-7'>Sign In With Google</h2>
+              <p>Sign in to the App with Google authentication securly </p>
+
+              <Button v>Sign In With Google</Button>
+            </DialogDescription>
+          </DialogHeader>
+        </DialogContent>
+      </Dialog>
+
     </div>
 
-    
+
   )
 }
 
