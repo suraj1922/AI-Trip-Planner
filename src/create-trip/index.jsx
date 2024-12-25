@@ -5,6 +5,7 @@ import { SelectTravelesList, SelectBudgetOptions } from '@/constant/option';
 import { Button } from '../components/ui/button';
 import { it } from 'node:test';
 import { toast } from 'sonner';
+import {FcGoogle} from "react-icons/fc";
 import {
   Dialog,
   DialogContent,
@@ -13,6 +14,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
+import axios from 'axios';
 
 
 function CreateTrip() {
@@ -34,9 +36,12 @@ function CreateTrip() {
   }, [formData])
 
 
+  const login = useGoogleLogin({
+    ponSuccess: (codeResp)=>console.log(codeResp),
+    onError:(error)=>console.log(error)
+  })
+
   const OnGenerateTrip = () => {
-
-
     const user = localStorage.getItem('user');
 
     if (!user) {
@@ -48,6 +53,10 @@ function CreateTrip() {
       return;
     }
 
+  }
+
+  const GetUserProfile=()=>{
+    axios.get(`https:www.googleapis.com/oauth2/v1/userinfo?acess_token`)
   }
   return (
     <div className='sm:px-10 md:px-32 lg:px-56 xl:px-10 px-5 mt-10'>
@@ -119,7 +128,11 @@ function CreateTrip() {
               <img src="./logo.svg" alt="" />
               <h2 className='font-bold text-lg mt-7'>Sign In With Google</h2>
               <p>Sign in to the App with Google authentication securly </p>
-              <Button>Sign In With Google</Button>
+              <Button 
+              onClick={login}
+              classNamew="w-full mt-5 flex gap-4 align-center">
+              <FcGoogle className='h-7 w-7'/>
+              Sign In With Google</Button>
             </DialogDescription>
           </DialogHeader>
         </DialogContent>
