@@ -55,9 +55,27 @@ function CreateTrip() {
 
   }
 
-  const GetUserProfile=()=>{
-    axios.get(`https:www.googleapis.com/oauth2/v1/userinfo?acess_token`)
-  }
+  const GetUserProfile = (tokenInfo) => {
+    if (!tokenInfo?.access_token) {
+      console.error("Access token is missing!");
+      return;
+    }
+  
+    axios
+      .get(`https://www.googleapis.com/oauth2/v1/userinfo?access_token=${tokenInfo.access_token}`, {
+        headers: {
+          Authorization: `Bearer ${tokenInfo.access_token}`,
+          Accept: 'application/json',
+        },
+      })
+      .then((resp) => {
+        console.log("User Profile:", resp.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching user profile:", error.response?.data || error.message);
+      });
+  };
+  
   return (
     <div className='sm:px-10 md:px-32 lg:px-56 xl:px-10 px-5 mt-10'>
       <h2 className='font-bold text-3xl'>Tell us your travel preferences🏕️☃️</h2>
