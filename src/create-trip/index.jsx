@@ -15,6 +15,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog"
 import axios from 'axios';
+import { chatSession } from '@/service/AIModel';
 
 
 function CreateTrip() {
@@ -41,18 +42,27 @@ function CreateTrip() {
     onError: (error) => console.log(error)
   })
 
-  const OnGenerateTrip = () => {
+  const OnGenerateTrip = async() => {
     const user = localStorage.getItem('user');
 
     if (!user) {
       setOpenDialog(true);
       return;
     }
-    if (formData?.noOdDays > 5 && !formData?.location || formData?.budget || formData?.noPeople) {
+    if (formData?.noOfDays > 5 && !formData?.location || formData?.budget || formData?.noPeople) {
       toast("Please fill all details")
       return;
     }
+    const FINAL_PROMPT = AI_PROMPT
+    .replace('{location}', formData?.location.label)
+    .replace('{totalDays}', formData?.noOfDays)
+    .replace('{traveler}', formData?.traveler)
+    .replace('{budget', formData?.budget)
+    .replace('{totalDays}', formData?.noOfDays)
 
+    console.log(FINAL_PROMPT);
+    const result = await chatSession.sendMessage(FINAL_PROMPT);
+    console.log(result?.response?.test());
   }
 
   const GetUserProfile = (tokenInfo) => {
