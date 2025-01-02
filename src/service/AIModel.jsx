@@ -13,7 +13,6 @@ const generationConfig = {
   maxOutputTokens: 8192,
   responseMimeType: "application/json",
 };
-
   export const chatSession = model.startChat({
     generationConfig,
     history: [
